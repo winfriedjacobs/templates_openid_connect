@@ -14,6 +14,7 @@ from fastapi import FastAPI
 from starlette.middleware.sessions import SessionMiddleware
 
 from config.web_session import WEB_SESSION_SECRET_KEY
+from routes.api import router as api_router
 from routes.authentication import router as authentication_router
 from routes.main import router as main_router
 
@@ -35,8 +36,11 @@ def create_app() -> FastAPI:
     app.add_middleware(SessionMiddleware, secret_key=WEB_SESSION_SECRET_KEY)
 
     # --- API Endpoints ---
+    app.include_router(api_router)
     app.include_router(authentication_router)
     app.include_router(main_router)
+
+    return app
 
 
 __all__ = ["create_app"]

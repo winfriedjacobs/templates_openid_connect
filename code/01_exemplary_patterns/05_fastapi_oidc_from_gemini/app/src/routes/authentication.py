@@ -10,6 +10,9 @@ from authentication.oauth import oauth_target, oidc_provider
 from db.user import internal_users_db
 from session_state import read_nonce_from_session
 
+
+DEFAULT_REDIRECT_URL = "/api/protected"
+
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
@@ -112,7 +115,6 @@ async def auth_callback(request: Request):
         # Remove the nonce from the session after successful validation to prevent replay attacks
         # todo request.session.pop(nonce_key, None)
 
-        DEFAULT_REDIRECT_URL = "/protected"
         redirect_url = request.session.get("target_url", DEFAULT_REDIRECT_URL)
         return RedirectResponse(
             url=redirect_url
