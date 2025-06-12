@@ -1,6 +1,8 @@
 from typing import Optional
 
 from fastapi import APIRouter, Depends
+from fastapi.responses import RedirectResponse
+
 
 from authentication.authenticate_endpoints import (
     get_current_user_from_session,
@@ -34,4 +36,8 @@ async def get_my_info(
     """
     if current_user:
         return {"authenticated": True, "user": current_user.model_dump()}
-    return {"authenticated": False, "user": None}
+
+    # instead of show a "no user"-info (like this:)...
+    #    return {"authenticated": False, "user": None}
+    # ... I redirect to /auth/login, which is expected to redirect to this endpoint again
+    return RedirectResponse(f"/auth/login/?target-url={router.url_path_for('get_my_info')}")

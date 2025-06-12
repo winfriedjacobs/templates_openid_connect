@@ -39,7 +39,7 @@ _oauth_keycloak = (  # we use _oauth_keycloak.(...) instead of _oauth.keycloak.(
 # We could even use both at the same time, which we don't; but at startup we decide which one to use
 
 
-oidc_provider = GOOGLE_OIDC_PROVIDER
+oidc_provider = KEYCLOAK_OIDC_PROVIDER
 if oidc_provider == GOOGLE_OIDC_PROVIDER:
     oauth_target = (
         _oauth_google  # or _oauth.google, but _oauth_google is stable when refactoring
