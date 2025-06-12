@@ -1,0 +1,5 @@
+2025-06-05 12:58:22,116 [   5887]   WARN - #c.i.m.l.c.q.QuotaManager2 - Quota refill state was updated by another thread, wanted to update to Known(next=2025-06-07T18:00:09.108Z, tariff=QuotaRefillInfoTariff(amount=2000000, duration=30d))
+2025-06-05 12:58:22,311 [   6082]   WARN - #c.i.m.l.c.q.QuotaManager2 - Wanted to update to Available(current=47515.384, maximum=2000000, until=2025-12-19T21:00:00Z)
+2025-06-05 12:58:28,346 [  12117]   WARN - #c.j.p.s.s.PySkeletonRefresher - Some skeletons failed to generate
+2025-06-05 12:58:28,346 [  12117]   WARN - #c.j.p.s.s.PySkeletonRefresher - libdnf._
+2025-06-05 12:58:33,904 [  17675]   WARN - #c.i.i.f.i.FTManager - Duplicate bundled template HTML File.html [HTML File: html (fileTemplates/internal/HTML File.html.ft), HTML File: html (fileTemplates/internal/HTML File.html.ft)]

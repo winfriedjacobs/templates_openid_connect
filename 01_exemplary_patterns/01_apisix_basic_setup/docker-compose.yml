@@ -1,0 +1,38 @@
+services:
+
+  etcd:
+    image: bitnami/etcd:latest
+    container_name: etcd
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
+    ports:
+      - "2379:2379"
+
+  apisix:
+    image: apache/apisix:latest
+    depends_on:
+      - etcd
+    volumes:
+      - ./apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro,Z
+    ports:
+      - "9080:9080"   # APISIX HTTP port
+      - "9443:9443"   # APISIX HTTPS port
+      # you can add /tcp 
+      # - "9080:9080/tcp"
+      # - "9443:9443/tcp"
+
+  # service for test backend:
+  # web:
+  #   image: hashicorp/http-echo
+  #   container_name: web
+  #   command: ["-text=Hello from backend"]
+  #   ports:
+  #     - "8080:5678/tcp"
+
+  # # service for debugging (here: check file config.yaml):
+  # debug:
+  #   image: busybox
+  #   command: cat /usr/local/apisix/conf/config.yaml
+  #   volumes:
+  #     - ./apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro,Z

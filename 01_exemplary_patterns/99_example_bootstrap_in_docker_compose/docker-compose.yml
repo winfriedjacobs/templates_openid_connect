@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:alpine
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.7
+    command: >
+      start-dev
+      --import-realm
+      --spi-import-provider-dir=/opt/keycloak/data/import
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    volumes:
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:Z
+    ports:
+      - "8081:8080"
+
+
+  tyk_gateway:
+    image: tykio/tyk-gateway:latest
+    depends_on:
+      - redis
+    volumes:
+      - ./tyk-gateway/tyk.conf:/opt/tyk-gateway/tyk.conf:Z
+    ports:
+      - "8080:8080"
+
+  bootstrap:
+    image: curlimages/curl
+    depends_on:
+      - tyk_gateway
+    volumes:
+      - ./setup:/opt/setup:Z
+    entrypoint: >
+      /bin/sh -c '
+        sleep 5;
+        echo "Registering API...";
+        curl -s -H "x-tyk-authorization: secret" \
+             -X POST http://tyk_gateway:8080/tyk/apis/ \
+             -d @/opt/setup/api.json;
+       '
+
+  # tyk_dashboard:
+  #   image: tykio/tyk-dashboard:latest
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     TYK_DB_LICENSEKEY: #"your-tyk-license"  # Für CE-Version leer lassen
+  #   volumes:
+  #     - ./tyk-dashboard/tyk_analytics.conf:/opt/tyk-dashboard/tyk_analytics.conf
+  #   depends_on:
+  #     - tyk_redis
+  #     - tyk_gateway

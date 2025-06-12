@@ -1,0 +1,14 @@
+[project]
+name = "05-fastapi-oidc-from-gemini"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "authlib>=1.6.0",
+    "fastapi[standard]>=0.115.12",
+    "itsdangerous>=2.2.0",
+    "python-jose[cryptography]>=3.5.0",
+    "starlette>=0.46.2",
+    "uvicorn>=0.34.3",
+]

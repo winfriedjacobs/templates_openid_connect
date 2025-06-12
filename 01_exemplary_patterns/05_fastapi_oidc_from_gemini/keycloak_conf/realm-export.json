@@ -1,0 +1,30 @@
+{
+  "realm": "demo",
+  "enabled": true,
+  "attributes": {
+    "frontendUrl": "http://localhost:8080"
+  },
+  "clients": [
+    {
+      "clientId": "apisix-client",
+      "enabled": true,
+      "publicClient": true,
+      "rootUrl": "http://localhost:9080",
+      "baseUrl": "http://localhost:9080/callback",
+      "redirectUris": ["http://localhost:9080/*"],
+      "protocol": "openid-connect"
+    }
+  ],
+  "users": [
+    {
+      "username": "testuser",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "testpass"
+        }
+      ]
+    }
+  ]
+}

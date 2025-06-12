@@ -1,0 +1,12 @@
+The basic APISIX setup that works for me.
+
+- works with both "docker compose" and "podman-compose"
+
+
+Fixed:
+  - did NOT work with the "latest" image ("apache/apisix:latest"), because that one uses the wrong http://127.0.0.1:... address, 
+    instead of the correct http://etcd:... address
+    - reason: changes in the conf.yaml schema, starting from 3.0.0.beta (= 2.99.0);
+      see https://github.com/apache/api six/blob/master/CHANGELOG.md#300-beta
+
+

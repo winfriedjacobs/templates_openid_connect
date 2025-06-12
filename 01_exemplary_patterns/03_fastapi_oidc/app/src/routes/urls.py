@@ -1,0 +1,6 @@
+# URL_ADMIN = "/admin"
+URL_AUTH_CALLBACK = "/auth"  # was: URL_CALLBACK = "/callback"
+URL_LOGIN = "/login"
+URL_LOGOUT = "/logout"
+URL_PROTECTED = "/protected"
+URL_ROOT = "/"

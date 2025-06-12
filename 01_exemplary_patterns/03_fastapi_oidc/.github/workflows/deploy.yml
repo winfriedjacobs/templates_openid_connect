@@ -1,0 +1,36 @@
+name: Deploy FastAPI App
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to DockerHub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Build and push image
+      run: |
+        docker build -t youruser/fastapi-keycloak-auth:latest .
+        docker push youruser/fastapi-keycloak-auth:latest
+
+    - name: SSH & deploy
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /home/youruser/fastapi-app
+          git pull
+          docker-compose down
+          docker-compose up -d --build

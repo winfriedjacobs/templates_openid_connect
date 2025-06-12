@@ -1,0 +1,30 @@
+apisix:
+  node_listen: 9080
+  enable_admin: false          # Important! disables Admin API
+  config_center: yaml          # Enables declarative mode
+
+# nginx_config:
+#   error_log: logs/error.log
+#   access_log: logs/access.log
+
+deployment:
+  role: data_plane
+  role_data_plane:
+    config_provider: yaml
+
+  admin:
+    admin_key:
+      - name: "admin"
+        key: "admin"
+        role: admin
+
+  etcd:
+    host:                           # it's possible to define multiple etcd hosts addresses of the same etcd cluster.
+      - "http://etcd:2379"          # multiple etcd address
+    prefix: "/apisix"               # apisix configurations prefix
+    timeout: 30                     # 30 seconds
+
+
+
+
+
