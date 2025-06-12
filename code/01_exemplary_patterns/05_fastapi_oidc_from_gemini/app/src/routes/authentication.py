@@ -6,9 +6,9 @@ from authlib.integrations.starlette_client import OAuthError
 from fastapi import APIRouter, HTTPException, Query, Request, status
 from fastapi.responses import RedirectResponse
 
-from authentication.oauth import oauth_target, oidc_provider
-from db.user import internal_users_db
-from session_state import read_nonce_from_session
+from src.authentication.oauth import oauth_target, oidc_provider
+from src.db.user import internal_users_db
+from src.session_state import read_nonce_from_session
 
 
 DEFAULT_REDIRECT_URL = "/api/protected"

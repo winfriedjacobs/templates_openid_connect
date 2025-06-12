@@ -8,7 +8,7 @@ from fastapi import Depends, HTTPException
 from starlette import status
 from starlette.requests import Request
 
-from model.user_session import UserSession
+from src.model.user_session import UserSession
 
 
 async def get_current_user_from_session(request: Request) -> Optional[UserSession]:
@@ -16,9 +16,9 @@ async def get_current_user_from_session(request: Request) -> Optional[UserSessio
     Dependency to get the current authenticated user from the session.
     """
     user_info = request.session.get("user")
-    if user_info:
-        return UserSession(**user_info)
-    return None
+
+    return UserSession(**user_info) if user_info else None
+
 
 
 def require_auth(current_user: UserSession = Depends(get_current_user_from_session)):

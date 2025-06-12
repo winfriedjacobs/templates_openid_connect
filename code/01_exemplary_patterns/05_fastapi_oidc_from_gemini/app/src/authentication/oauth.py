@@ -4,7 +4,7 @@ Initialize Authlib OAuth client
 
 from authlib.integrations.starlette_client import OAuth
 
-from config.oidc import (
+from src.config.oidc import (
     GOOGLE_OIDC_PROVIDER,
     KEYCLOAK_OIDC_PROVIDER,
     google_oidc_config,

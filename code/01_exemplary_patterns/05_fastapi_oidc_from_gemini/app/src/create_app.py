@@ -13,10 +13,10 @@ Code started with Gemini: https://gemini.google.com/app/2530e9b2cbbd2bf1?hl=de
 from fastapi import FastAPI
 from starlette.middleware.sessions import SessionMiddleware
 
-from config.web_session import WEB_SESSION_SECRET_KEY
-from routes.api import router as api_router
-from routes.authentication import router as authentication_router
-from routes.main import router as main_router
+from src.config.web_session import WEB_SESSION_SECRET_KEY
+from src.routes.api import router as api_router
+from src.routes.authentication import router as authentication_router
+from src.routes.main import router as main_router
 
 # --- Configuration ---
 # IMPORTANT: Replace with your actual secrets and configuration!

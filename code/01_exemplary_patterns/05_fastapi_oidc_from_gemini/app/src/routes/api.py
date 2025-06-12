@@ -4,11 +4,11 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import RedirectResponse
 
 
-from authentication.authenticate_endpoints import (
+from src.authentication.authenticate_endpoints import (
     get_current_user_from_session,
     require_auth,
 )
-from model.user_session import UserSession
+from src.model.user_session import UserSession
 
 
 router = APIRouter(prefix="/api", tags=["api"])
