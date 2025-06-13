@@ -36,7 +36,7 @@ google_oidc_config = OidcConfig(
     NAME=GOOGLE_OIDC_PROVIDER,
     CLIENT_ID="1074698109380-kbafcgqtile117l08sr6tncih9j18ocp.apps.googleusercontent.com",
     CLIENT_SECRET="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",
-    SERVER_METADATA_URL="https://accounts.google.com/.well-known/openid-configuration",
+    SERVER_METADATA_URL="https://accounts.google.com/.well-known/openid-configuration",  # also called "dicovery"
 )
 
 # ---
@@ -47,7 +47,9 @@ keycloak_oidc_config = OidcConfig(
     NAME=KEYCLOAK_OIDC_PROVIDER,
     CLIENT_ID="apisix-client",
     CLIENT_SECRET="sgxijWlwLh0K8qmmBNmWhrdokrCGQpiZ",
-    SERVER_METADATA_URL=f"{KEYCLOAK_BASE_URL}/realms/{KEYCLOAK_REALM}/.well-known/openid-configuration",
+    SERVER_METADATA_URL=(
+        f"{KEYCLOAK_BASE_URL}/realms/{KEYCLOAK_REALM}/.well-known/openid-configuration"
+    ),   # also called "dicovery"
 )
 
 

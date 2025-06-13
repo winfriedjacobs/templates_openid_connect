@@ -10,7 +10,6 @@ from src.authentication.oauth import oauth_target, oidc_provider
 from src.db.user import internal_users_db
 from src.session_state import read_nonce_from_session
 
-
 DEFAULT_REDIRECT_URL = "/api/protected"
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])

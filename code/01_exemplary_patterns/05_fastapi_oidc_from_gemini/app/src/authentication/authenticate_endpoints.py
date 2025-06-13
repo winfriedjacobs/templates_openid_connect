@@ -20,7 +20,6 @@ async def get_current_user_from_session(request: Request) -> Optional[UserSessio
     return UserSession(**user_info) if user_info else None
 
 
-
 def require_auth(current_user: UserSession = Depends(get_current_user_from_session)):
     """
     Dependency to enforce authentication. If no user is in session, raises 401.

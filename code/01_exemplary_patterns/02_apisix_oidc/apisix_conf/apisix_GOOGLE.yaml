@@ -1,14 +1,13 @@
-# version: KEYCLOAK authentication
+# version: GOOGLE authentication
 
 # multiple uri/endpoints secured by openid-connect
 
 # reused items
 x-openid-connect-default: &openid-connect-default
-  realm: demo
-  client_id: apisix-client
-  client_secret: of33sVd0ob0AxJGtm9AlVb1ptDauXhsi
-  discovery: http://keycloak:8080/realms/demo/.well-known/openid-configuration
-  redirect_uri: http://localhost:9080/callback
+  client_id: 1074698109380-kbafcgqtile117l08sr6tncih9j18ocp.apps.googleusercontent.com
+  client_secret: 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
+  discovery: https://accounts.google.com/.well-known/openid-configuration
+  redirect_uri: http://localhost:9080/auth/callback
   scope: openid email profile
   bearer_only: false
   log_level: debug
@@ -30,7 +29,7 @@ routes:
       nodes:
         "httpbin:80": 1
 
-  - uri: /callback
+  - uri: /auth/callback
     plugins:
       openid-connect:
         <<: *openid-connect-default
