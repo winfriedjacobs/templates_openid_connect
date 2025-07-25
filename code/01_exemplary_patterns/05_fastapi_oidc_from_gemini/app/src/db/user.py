@@ -3,7 +3,10 @@
 # after they authenticate via OIDC, linking their 'sub' ID to your internal user ID.
 # For simplicity, we'll just check if their OIDC 'sub' is known.
 
-internal_users_db = {}  # Stores {"oidc_sub_id": {"username": "...", "roles": [...]}}
+from typing import Dict, Any
+
+
+internal_users_db: Dict[str, Any] = {}   # Stores {"oidc_sub_id": {"username": "...", "roles": [...]}}
 
 
 __all__ = ["internal_users_db"]
